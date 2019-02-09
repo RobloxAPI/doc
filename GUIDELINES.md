@@ -1,8 +1,9 @@
 [DRAFT]
 
 # Guidelines
-This document provides guidelines for writing documentation for the
-[Roblox][roblox] Lua application programming interface (API).
+This project aims to provide documentation for the [Roblox][roblox] Lua
+application programming interface (API). This document provides guidelines for
+writing API documents for this project.
 
 [roblox]: https://corp.roblox.com/
 
@@ -59,13 +60,12 @@ within literal content. For example, `class:$CLASS` refers to the literal string
 This section describes requirements and recommendations for formatting the plain
 text of documents.
 
-A text editor that supports Markdown is recommended.
-
-A monospace font is recommended.
+For writing and editing documents, a text editor that supports Markdown is
+recommended. A monospace font is recommended.
 
 In general, the plain text itself should be readable and presentable, as though
-it were a final rendering of the document. For this reason, writers should
-strive for simple text and formatting.
+it were a final rendering of the document. For this reason, simple text and
+formatting should be strived for.
 
 Documents are formatted primarily with Markdown. In cases where multiple styles
 are available, the following styles are preferred:
@@ -112,7 +112,7 @@ Newlines must be in UNIX format (`\n` rather than `\r\n`).
 A document must have one trailing newline at the end of the file.
 
 ### Links
-In order to decouple documents from a particular rendering, several URL schemes
+In order to decouple documents from a particular rendering, several URI schemes
 are defined for referring to other documents or resources.
 
 - `res:$PATH`: Refers to a file located in the resource directory.
@@ -177,7 +177,7 @@ and displayed in isolation.
 The summary may contain more than one sentence, or even multiple paragraphs, but
 it should only provide a quick overview of the entity.
 
-The Summary header may be omitted; when a section named "Summary" cannot be
+The Summary heading may be omitted; when a section named "Summary" cannot be
 found, the "orphan" section is used instead. An orphan section is the content
 located after the start of the section, and before the start of the first
 subsection. For example:
@@ -202,7 +202,7 @@ This content is treated as the summary.
 This content is treated as the details.
 ```
 
-**Omitting the summary header is preferred.**
+**Omitting the summary heading is preferred.**
 
 #### Details
 The Details section provides absolutely all information about the entity.
@@ -278,19 +278,70 @@ abbreviation.
 > The Roblox application programming interface (API)
 
 ### Stubs
-Avoid empty documents or sections. For example, if a class member does not yet
-have documentation, then its name should be omitted from the Members section. If
-an entire class has no documentation, then it should have no document file.
+Avoid empty documents or sections. That is, if a class member does not yet have
+documentation, then its name should be omitted from the Members section. If an
+entire class has no documentation, then it should have no document file.
 
 ### Images
 Avoid images containing text. If an image requires explanation, write it near
 the image.
 
+### Events
+A Roblox event (RBXScriptSignal) fires in response to some action. The event
+should always be described as firing either before or after the action.
+
+For example, PlayerAdded fires *after* a player is added to the game. When a
+listener receives the affected Player object, it will already have its parent
+set.
+
+On the other hand, PlayingRemoving fires *before* the player is removed from the
+game. That is, it will also still have a parent when received by a listener.
+
+### Linking
+Excessive linking should be avoided. If an entity is referred to multiple times,
+then only first reference needs to be linked. On the other hand, sparse linking
+should also be avoided.
+
+To decide whether a reference should be linked, consider how the reader will
+view the content. That is, if a reader can jump directly to a particular
+section, then the first occurrence of the reference, in relation to that
+section, should be linked. This is because the reader will have skipped over any
+previous content, and so will have missed a previous link of that reference.
+
+For example:
+
+```markdown
+## ChildAdded
+This section refers to [Parent](member:Parent). A second reference to Parent is
+made, but it is not linked.
+
+## ChildRemoving
+This section also refers to [Parent](member:Parent). It is also linked despite
+being the third reference in this document, because a reader is able to jump
+directly to this section.
+```
+
+Generally, treat *only* the following sections as if they can be jumped to
+directly:
+
+- The Summary section of a primary entity.
+- The Details section of a primary entity.
+- The Examples section of a primary entity.
+- The section of a secondary entity.
+
+This rule is not absolute. For example, it may be worth linking a reference if
+the section is long and detailed enough to have subsections, or if the subject
+has changed and the reference hasn't appeared recently.
+
 ### Common terminology
 Several terms are defined for use across the entire API documentation body.
 
-- **Object**: An instance of the current class. That is, instead of saying "an
-  instance of this class", just say "object". Avoid using "instance".
+- **Object**: An instance of the current class. For example, a member is
+  described in the context of a class, so an instance of that class is referred
+  to as "the object". "The current object" may be used when differentiating
+  between the object and others.
+	- In particular, avoid using "instance", as this already has a specific
+	  definition in the context of the API.
 - **User**: A user of the current entity. Only use specific terms like
   "developer" when describing something that applies only to that type of user.
 - **Game**:
@@ -311,3 +362,10 @@ Several terms are defined for use across the entire API documentation body.
 - **Engineer**: A person who develops Roblox.
 - **Remote**: Referring to both RemoteFunctions and RemoteEvents.
 - **Bindable**: Referring to both BindableFunctions and BindableEvents.
+
+### Other
+This section lists other minor details to consider.
+
+- Errors, warnings, and other such messages are merely "emitted", rather than
+  having a specific result such as being "displayed in output". Errors in
+  particular are usually "thrown", and can be "caught" by `pcall` or coroutines.
