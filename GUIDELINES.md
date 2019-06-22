@@ -72,8 +72,8 @@ are available, the following styles are preferred:
 
 - `*text*` for italic text.
 - `**text**` for bold text.
-- `## Name` for headings. In particular, the multiline heading style should be
-  avoided.
+- `## Name` for headings (ATX-style). In particular, setext-style headings
+  should be avoided.
 - `-` for unordered lists.
 - `1.` for ordered lists.
 - `----` for horizontal rules.
@@ -165,7 +165,7 @@ Workspace class.
 ### Sections
 Regardless of file type, all documents have their own structure. In general, a
 document consists of "sections", which in turn may contain their own
-sub-sections. For Markdown, headings are used.
+sub-sections. For Markdown, headings are used to delimit sections.
 
 Every entity document should strive to have the following pieces of information:
 
@@ -202,7 +202,7 @@ This content is treated as the summary.
 This content is treated as the details.
 ```
 
-**Omitting the summary heading is preferred.**
+Retaining the summary heading is preferred unless it is within a sub-section.
 
 #### Details
 The Details section provides absolutely all information about the entity.
@@ -234,10 +234,10 @@ Depending on the type, a primary entity may have a fourth section, called
 the primary entity.
 
 The name of a direct subsection of Members is the name of the secondary entity.
-Subsections of this section are the usual Summary, Details, and Examples, as
-described above.
+Sub-sections of this section are the usual Summary, Details, and Examples, as
+described above. In this case, *omitting* the Summary heading is preferred.
 
-Direct subsections of the Members section should be ordered by name.
+Direct sub-sections of the Members section should be ordered by name.
 
 ## Content
 This section describes how documentation should be written.
@@ -252,17 +252,18 @@ and *explaining* what it does. Explanations should be used in regards to API
 entities, and declarations should be reserved for user-controlled elements, such
 as callback functions.
 
-Avoid declaring what an entity must do:
+*Avoid declaring what an entity must do:*
 
 > GetChildren must return an array of the object's children.
 
-Instead, explain what the entity does:
+*Instead, explain what the entity does:*
 
 > GetChildren returns an array of the object's children.
 
 In particular, the first sentence of a summary should be written with the
 subject omitted, as the subject is usually already nearby.
 
+> #### GetChildren
 > Returns an array of the object's children.
 
 Now consider a callback, which receives API-controlled arguments, and returns
@@ -283,8 +284,8 @@ documentation, then its name should be omitted from the Members section. If an
 entire class has no documentation, then it should have no document file.
 
 ### Images
-Avoid images containing text. If an image requires explanation, write it near
-the image.
+Avoid images containing text. If an image requires explanation, write it in the
+document near the image.
 
 ### Events
 A Roblox event (RBXScriptSignal) fires in response to some action. The event
@@ -329,39 +330,77 @@ directly:
 - The Examples section of a primary entity.
 - The section of a secondary entity.
 
-This rule is not absolute. For example, it may be worth linking a reference if
-the section is long and detailed enough to have subsections, or if the subject
-has changed and the reference hasn't appeared recently.
+This rule is not absolute. It may be worth linking a reference if the section is
+long and detailed enough to have subsections, or if the subject has changed and
+the reference hasn't appeared recently.
 
 ### Common terminology
 Several terms are defined for use across the entire API documentation body.
 
-- **Object**: An instance of the current class. For example, a member is
-  described in the context of a class, so an instance of that class is referred
-  to as "the object". "The current object" may be used when differentiating
-  between the object and others.
-	- In particular, avoid using "instance", as this already has a specific
-	  definition in the context of the API.
-- **User**: A user of the current entity. Only use specific terms like
-  "developer" when describing something that applies only to that type of user.
-- **Game**:
-- **Place**:
-- **Universe**: A game, comprising a set of places.
-- **Player**: A person playing a game on Roblox.
-- **Character**: A player's in-game avatar.
-- **Peer**: A program that runs Roblox, or the device on which such a program
-  runs.
-- **Client**: A peer that runs on the player's device.
-- **Server**: A peer that serves clients.
-- **Instance**: An active copy of a place running on a peer. (TODO: find a
-  better word for this)
-- **Game tree**: the Instance hierarchy that makes up a game.
-- **DataModel**: The root of a game tree. Specifically, "workspace" must not be
-  used for this.
-- **Developer**: A person who develops games on Roblox.
-- **Engineer**: A person who develops Roblox.
-- **Remote**: Referring to both RemoteFunctions and RemoteEvents.
-- **Bindable**: Referring to both BindableFunctions and BindableEvents.
+<dl>
+<dt>object</dt>
+<dd>An instance of the current class. For example, a member is described in the
+context of a class, so an instance of that class is referred to as "the object".
+"The current object" may be used when differentiating between the object and
+others. In particular, avoid using "instance", as this already has a specific
+definition in the context of the API.</dd>
+
+<dt>member</dt>
+<dd>A secondary entity belonging to a class. Distinct from "child", which
+involves a hierarchical relationship with another class.</dd>
+
+<dt>user</dt>
+<dd>A user of the current entity. Only use specific terms like "developer" when
+describing something that applies only to that type of user.</dd>
+
+<dt>game</dt>
+<dd>A collection of place files, instances of such, assets, data stores,
+settings, stats, etc.</dd>
+
+<dt>place</dt>
+<dd>A file containing a single game tree. May also refer to an actively running
+instance of such.</dd>
+
+<dt>universe</dt>
+<dd>Equivalent to "game". Used where "game" would be ambiguous.</dd>
+
+<dt>player</dt>
+<dd>A person playing a game on Roblox.</dd>
+
+<dt>character</dt>
+<dd>A player's in-game avatar.</dd>
+
+<dt>peer</dt>
+<dd>A program that runs Roblox, or the device on which such a program runs.</dd>
+
+<dt>client</dt>
+<dd>A peer that runs on the player's device.</dd>
+
+<dt>server</dt>
+<dd>A peer that serves clients.</dd>
+
+<dt>job</dt>
+<dd>An active copy of a place running on a peer. Once again, avoid using
+"instance".</dd>
+
+<dt>game tree</dt>
+<dd>A complete object hierarchy with a DataModel as its root.</dd>
+
+<dt>DataModel</dt>
+<dd>The root object of a game tree. Literally of the <code>DataModel</code>
+class. "Workspace", which sometimes occurs in the wild, must not be used for
+this.</dd>
+
+<dt>developer</dt>
+<dd>A person who develops games on Roblox.</dd>
+
+<dt>engineer</dt>
+<dd>A person who develops Roblox.</dd> <dt>remote</dt>
+<dd>Referring to both RemoteFunctions and RemoteEvents.</dd>
+
+<dt>bindable</dt>
+<dd>Referring to both BindableFunctions and BindableEvents.</dd>
+</dl>
 
 ### Other
 This section lists other minor details to consider.
