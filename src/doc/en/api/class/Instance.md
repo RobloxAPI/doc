@@ -99,7 +99,7 @@ Returns whether the object is a descendant of a given object.
 parent, passing `nil` always returns true.
 
 ## Name
-Specifies a value used to identify the object.
+Specifies a string used to identify the object.
 
 The value of Name is constrained to a maximum length of 100 bytes. On
 assignment, extra bytes are truncated.
