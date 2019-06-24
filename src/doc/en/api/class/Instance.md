@@ -101,6 +101,9 @@ parent, passing `nil` always returns true.
 ## Name
 Specifies a value used to identify the object.
 
+The value of Name is constrained to a maximum length of 100 bytes. On
+assignment, extra bytes are truncated.
+
 ### Details
 While Name is generally used to differentiate between sibling objects, no
 attempts to enforce the uniqueness of the value are made.
