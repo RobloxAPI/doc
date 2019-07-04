@@ -3,6 +3,22 @@ The root class of all classes in the API.
 
 # Details
 
+## Hierarchy
+Objects are arranged in a tree structure. An object can have zero or more
+**child** objects, which are below it in the tree. Conversely, an object can
+have at most one **parent** object, which is above it in the tree. The **root**
+of a tree can have children, but has no parent.
+
+Objects that share the same parent are referred to as **siblings**.
+
+An **ancestor** is any object that is reachable by repeatedly moving from child
+to parent. That is, an ancestor is the parent of an object, or the parent's
+parent, and so on, all the way to the root of the tree.
+
+A **descendant** is any object that is reachable by repeatedly moving from
+parent to child. That is, a descendant is a child of an object, or a child of
+the child, and so on.
+
 # Members
 
 ## AncestryChanged
