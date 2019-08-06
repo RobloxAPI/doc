@@ -27,6 +27,42 @@ Fired after the ancestry of the object changes.
 ## Archivable
 Determines whether the object can be serialized.
 
+### Details
+When Archivable is false, the object will not be included when it is a part of a
+place or model that is saved to a file or published to Roblox. The object is
+also excluded from being copied with [Clone](member:Clone).
+
+### Examples
+Avoid cloning descendants by temporarily setting Archivable.
+```lua
+function CopyObject(object)
+	local children = object:GetChildren()
+	local currentState = {}
+	for i, child in pairs(children) do
+		currentState[i] = child.Archivable
+		child.Archivable = false
+	end
+	local copy = object:Clone()
+	for i, child in pairs(children) do
+		child.Archivable = currentState[i]
+	end
+	return copy
+end
+
+local part = Instance.new("Part")
+part.Name = "Original"
+part.Color = BrickColor.Red().Color
+local smoke = Instance.new("Smoke", part)
+smoke.Archivable = false
+Instance.new("Fire", part)
+part.Parent = workspace
+
+local copy = CopyObject(part)
+copy.Name = "Copy"
+copy.Position = Vector3.new(8, 0, 0)
+copy.Parent = workspace
+```
+
 ## Changed
 Fired after a property of the object changes.
 
