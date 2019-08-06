@@ -115,23 +115,60 @@ A document must have one trailing newline at the end of the file.
 In order to decouple documents from a particular rendering, several URI schemes
 are defined for referring to other documents or resources.
 
-- `res:$PATH`: Refers to a file located in the resource directory.
-	- `$PATH` is a relative file path (e.g. `image.png`).
-- `class:$CLASS`: Refers to a class document.
-	- `$CLASS` is the name of a class entity.
-- `class:$CLASS/$MEMBER`: Refers to a member within a class document.
-	- `$CLASS` is the name of a class entity.
-	- `$MEMBER` is the name of a member entity within the class.
-- `enum:$ENUM`: Refers to an enum document.
-	- `$ENUM` is the name of an enum entity.
-- `enum:$ENUM/$MEMBER`: Refers to a member (enum item) within an enum document.
-	- `$ENUM` is the name of an enum entity.
-	- `$MEMBER` is the name of an enum item entity within the enum.
-- `type:$TYPE`: Refers to a data type document.
-	- `$TYPE` is the name of a type entity.
-- `member:$MEMBER`: Refers to a member within the current document.
-	- `$MEMBER` is the name of a secondary entity within the primary entity of
-	  the current document.
+<dl>
+
+<dt><code>res:$PATH</code></dt>
+<dd>
+
+Refers to a file located in the resource directory. `$PATH` is a relative file
+path (e.g. `image.png`).
+
+</dd>
+
+<dt><code>class:$CLASS</code></dt>
+<dd>
+
+Refers to a class document. `$CLASS` is the name of a class entity.
+
+</dd>
+
+<dt><code>class:$CLASS/$MEMBER</code></dt>
+<dd>
+
+Refers to a member within a class document. `$CLASS` is the name of a class
+entity. `$MEMBER` is the name of a member entity within the class.
+
+</dd>
+
+<dt><code>enum:$ENUM</code></dt>
+<dd>
+
+Refers to an enum document. `$ENUM` is the name of an enum entity.
+
+</dd>
+
+<dt><code>enum:$ENUM/$MEMBER</code></dt>
+<dd>
+
+Refers to a member (enum item) within an enum document. `$ENUM` is the name of
+an enum entity. `$MEMBER` is the name of an enum item entity within the enum.
+
+</dd>
+
+<dt><code>type:$TYPE</code></dt>
+<dd>
+
+Refers to a data type document. `$TYPE` is the name of a type entity.
+
+</dd>
+
+<dt><code>member:$MEMBER</code></dt>
+<dd>
+
+Refers to a member within the current document. `$MEMBER` is the name of a
+secondary entity within the primary entity of the current document.
+
+</dl>
 
 The usual `http` URL scheme can be used to refer to external references (note
 that `https` is preferred, when available).
@@ -154,31 +191,90 @@ The second "Foo Bar" heading:
 
 	[Foo Bar](#doc-foo-bar-2)
 
+## File types
+Documents have the `.md` file extension, indicating a Markdown file.
+
+Resource file types include anything that can be referred by or embedded into an
+HTML file.
+
 ## File structure
+
 All documents and related files are located under the `src/` directory.
 
-- `src/`: The root of the document file tree.
-- `src/res/`: Resources; embedded images, etc. May contain subdirectories.
-- `src/doc/`: Root location of document files.
-- `src/doc/$LANG/$TYPE/$PRIMARY.$EXT`
-	- `$LANG` is an IETF language tag, indicating the language of the contained
-	  documents. For example, `en` represents English.
-	- `$TYPE` is the API entity type. There are currently three types:
-		- `class`: API class entities. e.g. Instance, Workspace, Model, Part.
-		- `enum`: API enum entities. e.g. NormalId, KeyCode, SurfaceType.
-		- `type`: API data type entities. e.g. bool, int, Vector3, BrickColor.
-	- `$PRIMARY` is the name of a primary API entity.
-	- `$EXT` is the file extension. Currently, `.md` for markdown is supported.
+<dl>
+
+<dt><code>src/</code></dt>
+<dd>
+
+The root of the document file tree.
+
+</dd>
+
+<dt><code>src/res/</code></dt>
+<dd>
+
+Global resources; embedded images, etc. May contain subdirectories. Files
+are visible to all documents.
+
+</dd>
+
+<dt><code>src/doc/</code></dt>
+<dd>
+
+Root location of documents.
+</dd>
+
+<dt><code>src/doc/$LANG/</code></dt>
+<dd>
+
+Documents of a specific language. `$LANG` is an IETF language tag, indicating
+the language of the contained documents. For example, `en` represents English.
+This directory only contains directories.
+
+</dd>
+
+<dt><code>src/doc/$LANG/$CATEGORY/</code></dt>
+<dd>
+
+Documents of a particular category.
+
+Any descendant document of the form `$NAME.md` may have an optional sibling
+directory called `$NAME` which contains resource files visible only to that
+specific document.
+
+</dd>
+
+<dt><code>src/doc/$LANG/api/</code></dt>
+<dd>API documents.</dd>
+
+<dt><code>src/doc/$LANG/api/$TYPE/</code></dt>
+<dd>
+
+API entities namespaced by type. There are currently 3 types:
+
+- `class`: API class entities. e.g. Instance, Workspace, Model, Part.
+- `enum`: API enum entities. e.g. NormalId, KeyCode, SurfaceType.
+- `type`: API data type entities. e.g. bool, int, Vector3, BrickColor.
+
+</dd>
+
+<dt><code>src/doc/$LANG/api/$TYPE/$PRIMARY.md</code></dt>
+<dd>
+
+The combination of `$TYPE/$PRIMARY.md` indicates a file that documents the
+referred API entity. For example, `class/Workspace.md` documents the *Workspace*
+*class*.
+
+</dd>
+
+</dl>
 
 Here are some examples:
 
-- `src/doc/en/class/Workspace.md`: Document for the Workspace class in English.
-- `src/doc/es/enum/NormalId.md`: Document for the NormalId enum in Spanish.
-- `src/doc/de/type/Vector3.md`: Document for the Vector3 type in German.
-
-The combination of `$PRIMARY.$EXT` indicates a file that documents the referred
-API entity. For example, `class/Workspace.md` is a markdown file documenting the
-Workspace class.
+- `src/doc/en/api/class/Workspace.md`: Document for the Workspace class in English.
+- `src/doc/es/api/enum/NormalId.md`: Document for the NormalId enum in Spanish.
+- `src/doc/de/api/type/Vector3.md`: Document for the Vector3 type in German.
+- `src/doc/de/api/type/Vector3/example.png`: Resource visible only to `Vector3.md`.
 
 ### Sections
 Regardless of file type, all documents have their own structure. In general, a
@@ -356,6 +452,7 @@ the reference hasn't appeared recently.
 Several terms are defined for use across the entire API documentation body.
 
 <dl>
+
 <dt>object</dt>
 <dd>An instance of the current class. For example, a member is described in the
 context of a class, so an instance of that class is referred to as "the object".
@@ -372,15 +469,18 @@ involves a hierarchical relationship with another class.</dd>
 describing something that applies only to that type of user.</dd>
 
 <dt>game</dt>
-<dd>A collection of place files, instances of such, assets, data stores,
-settings, stats, etc.</dd>
-
-<dt>place</dt>
-<dd>A file containing a single game tree. May also refer to an actively running
-instance of such.</dd>
+<dd>A collection of place files, assets, data stores, settings, stats, active
+servers, etc.</dd>
 
 <dt>universe</dt>
 <dd>Equivalent to "game". Used where "game" would be ambiguous.</dd>
+
+<dt>place</dt>
+<dd>A file containing a single game tree. May also refer to an actively running
+job of such.</dd>
+
+<dt>job</dt>
+<dd>An active copy of a place running on a peer. Avoid using "instance".</dd>
 
 <dt>player</dt>
 <dd>A person playing a game on Roblox.</dd>
@@ -397,10 +497,6 @@ instance of such.</dd>
 <dt>server</dt>
 <dd>A peer that serves clients.</dd>
 
-<dt>job</dt>
-<dd>An active copy of a place running on a peer. Once again, avoid using
-"instance".</dd>
-
 <dt>game tree</dt>
 <dd>A complete object hierarchy with a DataModel as its root.</dd>
 
@@ -413,11 +509,22 @@ this.</dd>
 <dd>A person who develops games on Roblox.</dd>
 
 <dt>engineer</dt>
-<dd>A person who develops Roblox.</dd> <dt>remote</dt>
-<dd>Referring to both RemoteFunctions and RemoteEvents.</dd>
+<dd>A person who develops Roblox.</dd>
 
-<dt>bindable</dt>
-<dd>Referring to both BindableFunctions and BindableEvents.</dd>
+<dt>Remote</dt>
+<dd>Referring to both RemoteFunctions and RemoteEvents. Should be
+capitalized.</dd>
+
+<dt>Bindable</dt>
+<dd>Referring to both BindableFunctions and BindableEvents. Should be
+capitalized.</dd>
+
+<dt>save</dt>
+<dd>To store a place, model, or other asset locally on the user's device.</dd>
+
+<dt>publish</dt>
+<dd>To upload a place, model, or other asset to Roblox.</dd>
+
 </dl>
 
 ### Other
