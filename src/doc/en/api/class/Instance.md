@@ -66,6 +66,64 @@ copy.Parent = workspace
 ## Changed
 Fired after a property of the object changes.
 
+### Details
+*property* is the name of the property that changed. This can be used to index
+the object to get the property's new value.
+
+Changed is fired by changes to *all* properties of the object. If only one or a
+few properties need to be monitored, [GetPropertyChangedSignal][GPCS] should be
+used instead.
+
+For performance reasons, changes to a property made by the physics engine will
+not cause Changed to fire. For example, Changed will fire when the
+[Position](class:Part/Position) of a [Part](class:Part) is modified by a script,
+but will not fire while the part is falling.
+
+#### Bugs
+Certain classes have hidden properties that cannot be indexed, but can still
+cause Changed to fire. When indexing such an object with *property* unguarded,
+using pcall is recommended.
+
+### Examples
+Copy changes in appearance from one part to another.
+```lua
+local appearance = {
+	Color        = true,
+	Material     = true,
+	Reflectance  = true,
+	Transparency = true,
+}
+local original = Instance.new("Part", workspace)
+local copy = Instance.new("Part", workspace)
+original.Changed:Connect(function(property)
+	if not appearance[property] then
+		return
+	end
+	copy[property] = original[property]
+end)
+
+original.Position = Vector3.new(8, 0, 0)
+original.Color = BrickColor.Blue().Color
+```
+
+Safely copy all changes from one part to another.
+```lua
+local original = Instance.new("Part", workspace)
+local copy = Instance.new("Part", workspace)
+original.Changed:Connect(function(property)
+	local ok, value = pcall(function()
+		return original[property]
+	end)
+	if not ok then
+		return
+	end
+	copy[property] = value
+end)
+
+copy.Position = Vector3.new(8, 0, 0)
+original.Color = BrickColor.Blue().Color
+```
+
 ## ChildAdded
 Fired after a child is added to the object.
 
@@ -130,6 +188,8 @@ Returns a list of all the descendants of the object.
 Returns a name formatted according to the ascendants of the object.
 
 ## GetPropertyChangedSignal
+[GPCS]: member:GetPropertyChangedSignal
+
 Returns a [signal](type:RBXScriptSignal) that fires after a property of the
 given name changes.
 
