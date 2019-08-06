@@ -191,6 +191,21 @@ The second "Foo Bar" heading:
 
 	[Foo Bar](#doc-foo-bar-2)
 
+If an entity name is too unwieldy for linking to within a document, then
+reference links may be used. The reference should be placed at the top of the
+section of the referred entity.
+
+For example:
+```markdown
+## Changed
+A link to [GetPropertyChangedSignal][GPCS].
+
+## GetPropertyChangedSignal
+[GPCS]: member:GetPropertyChangedSignal
+
+Description of GetPropertyChangedSignal...
+```
+
 ## File types
 Documents have the `.md` file extension, indicating a Markdown file.
 
@@ -342,6 +357,10 @@ An example should strive to be useful; it should be tailored specifically to the
 entity, demonstrating its capabilities. Ideally, it should not be possible to
 just swap out the entity with another.
 
+An example should be stand-alone; it should be possible to copy the example and
+run it in the Studio's command bar. For complex examples were this isn't
+possible, prerequisites or instructions should be provided.
+
 #### Members
 Depending on the type, a primary entity may have a fourth section, called
 "Members". This contains documentation for each secondary entity belonging to
@@ -400,6 +419,22 @@ entire class has no documentation, then it should have no document file.
 ### Images
 Avoid images containing text. If an image requires explanation, write it in the
 document near the image.
+
+### Member parameters
+Any time a member parameter is referred to, *italics* must be used. The
+capitalization of the parameter must be as given by the API, even at the start
+of sentences.
+
+```markdown
+## FindFirstChild
+*name* matches the Name of the child to be found. *recursive* expands the search
+to all descendants.
+```
+
+Within a member section, a parameter given by name refers to a parameter of the
+current member. If a parameter on another member needs to be referred to, use
+language that links it to the referred member. e.g. rather than just "*name*",
+use "the *name* argument of FindFirstChild".
 
 ### Events
 A Roblox event (RBXScriptSignal) fires in response to some action. The event
