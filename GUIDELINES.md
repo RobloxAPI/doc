@@ -260,7 +260,12 @@ specific document.
 </dd>
 
 <dt><code>src/doc/$LANG/api/</code></dt>
-<dd>API documents.</dd>
+<dd>
+
+Documents of the API category. These are structured to fit with generated API
+pages.
+
+</dd>
 
 <dt><code>src/doc/$LANG/api/$TYPE/</code></dt>
 <dd>
@@ -497,7 +502,7 @@ definition in the context of the API.</dd>
 
 <dt>member</dt>
 <dd>A secondary entity belonging to a class. Distinct from "child", which
-involves a hierarchical relationship with another class.</dd>
+involves a hierarchical relationship with another object.</dd>
 
 <dt>user</dt>
 <dd>A user of the current entity. Only use specific terms like "developer" when
