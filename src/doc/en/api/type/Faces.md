@@ -7,7 +7,7 @@ Represents a set of the six sides of a box that are considered active.
 
 ### `Faces.new(...)`
 All components of Faces are initialized to false. A variable list of arguments
-is recieved. The first 6 arguments are traversed, and when a
+is received. The first 6 arguments are traversed, and when a
 [NormalId](enum:NormalId) value is encountered, the component of Faces
 corresponding to the value is set to true. Other values are ignored.
 

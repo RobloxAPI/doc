@@ -7,7 +7,7 @@ Represents a set of coordinate axes that are considered active.
 
 ### `Axes.new(...)`
 All components of Axes are initialized to false. A variable list of arguments is
-recieved. The first 6 arguments are traversed. When an [Axis](enum:Axis) or
+received. The first 6 arguments are traversed. When an [Axis](enum:Axis) or
 [NormalId](enum:NormalId) value is encountered, the component of Axes
 corresponding to the value is set to true. Other values are ignored.
 
