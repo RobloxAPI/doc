@@ -1,6 +1,6 @@
 # Members
 
-# RespectFilteringEnabled
+## RespectFilteringEnabled
 Determines whether sounds are replicated regardless of the FilteringEnabled
 setting.
 
