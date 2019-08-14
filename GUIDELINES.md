@@ -191,6 +191,10 @@ The second "Foo Bar" heading:
 
 	[Foo Bar](#doc-foo-bar-2)
 
+When creating new headings, other occurrences of headings with the same name in
+the document should be considered, as well as links to those headings. The
+heading number within a link may have to be adjusted.
+
 If an entity name is too unwieldy for linking to within a document, then
 reference links may be used. The reference should be placed at the top of the
 section of the referred entity.
@@ -205,6 +209,14 @@ A link to [GetPropertyChangedSignal][GPCS].
 
 Description of GetPropertyChangedSignal...
 ```
+
+More generally, a local reference (within the same document) should be placed at
+the top of the referred section.
+
+External references are placed based on where they're used. If such a reference
+is used throughtout the entire document, then it should be placed at the bottom
+of the document. If it is used only within a single section, then it may be
+placed at the bottom of that section.
 
 ## File types
 Documents have the `.md` file extension, indicating a Markdown file.
