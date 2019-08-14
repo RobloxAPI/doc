@@ -24,6 +24,17 @@ the child, and so on.
 ## AncestryChanged
 Fired after the ancestry of the object changes.
 
+### Details
+AncestryChanged fires after the [Parent](member:Parent) of the object or any
+ancestor has changed. *child* is the object whose Parent has changed, and is
+never nil. *parent* is the new value of the Parent, which may be nil.
+
+If changes only to the Parent of the object need to be detected, then
+[GetPropertyChangedSignal][GPCS] should be used instead.
+
+AncestryChanged is affected by [parent locking](#doc-locking). Modifying the
+Parent of *child* before it has resolved should be avoided.
+
 ## Archivable
 Determines whether the object can be serialized.
 
