@@ -4,6 +4,7 @@
 Globally controls the resetting behavior of
 [LayerCollectors](class:LayerCollector) under the [PlayerGui](class:PlayerGui).
 
+### Details
 When ResetPlayerGuiOnSpawn is true (the default), a LayerCollector under the
 PlayerGui will reset if its [ResetOnSpawn](class:LayerCollector/ResetOnSpawn)
 property is also true. When ResetPlayerGuiOnSpawn is false, LayerCollectors will
