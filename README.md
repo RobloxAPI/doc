@@ -9,8 +9,9 @@ Documents are located within the `src` directory. The
 [GUIDELINES.md](GUIDELINES.md) document details how this project is structured,
 and how to write API documents.
 
-Documents are licensed under a [Creative Commons Attribution-ShareAlike 4.0
-International License][license].
+All documents within this repository, unless noted otherwise, are licensed to
+the Roblox API Reference Documentation contributors under the
+[CC-BY-SA-4.0][license] license.
 
 Documents have been authored using information from the following sources:
 
