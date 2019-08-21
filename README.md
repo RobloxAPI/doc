@@ -12,6 +12,14 @@ and how to write API documents.
 Documents are licensed under a [Creative Commons Attribution-ShareAlike 4.0
 International License][license].
 
+Documents have been authored using information from the following sources:
+
+- Original research
+- [DevHub](https://developer.roblox.com/)
+- [DevForum](https://devforum.roblox.com/)
+- Roblox wiki (defunct)
+- Roblox forums (defunct)
+
 *This project is not affiliated with [Roblox Corporation][roblox].*
 
 [roblox]: https://corp.roblox.com/
