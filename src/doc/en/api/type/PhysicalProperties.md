@@ -1,6 +1,10 @@
+# Summary
+Describes the physical aspects of a [BasePart](class:BasePart).
+
 # Details
 
-## PhysicalProperties
+## Material values
+The following table shows the current values for each [Material](enum:Material):
 
 Name          | Density | Friction | Elasticity | FrictionWeight | ElasticityWeight
 --------------|---------|----------|------------|----------------|-----------------
