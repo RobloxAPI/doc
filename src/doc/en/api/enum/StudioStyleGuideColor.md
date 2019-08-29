@@ -111,15 +111,43 @@ variations:
 
 <!--
 
-local theme = settings().Studio.Theme
-for _, c in pairs(Enum.StudioStyleGuideColor:GetEnumItems()) do
-	local s = {c.Value,c.Name}
-	for _, m in pairs(Enum.StudioStyleGuideModifier:GetEnumItems()) do
-		local c = theme:GetColor(c, m)
-		s[#s+1] = string.format("#%02X%02X%02X",c.r*255,c.g*255,c.b*255)
+local themes = settings().Studio:GetAvailableThemes()
+local colors = Enum.StudioStyleGuideColor:GetEnumItems()
+local mods = Enum.StudioStyleGuideModifier:GetEnumItems()
+local max = 0
+for _, color in pairs(colors) do
+	if #color.Name > max then
+		max = #color.Name
 	end
-	print(table.concat(s, "\t"))
 end
+local o = "<table>\n\t<thead><tr><th>Item</th>"
+for _, theme in pairs(themes) do
+	o = o .. "<th>" .. theme.Name .. "</th>"
+end
+o = o .. "</tr></thead>\n\t<tbody>\n"
+for _, color in pairs(colors) do
+	o = o .. "\t<tr><td>" .. color.Name .. "</td>" .. string.rep(" ", max - #color.Name)
+	for _, theme in pairs(themes) do
+		o = o .. "<td><div class=\"swatches\" style=\""
+		for i, mod in pairs(mods) do
+			local c = theme:GetColor(color, mod)
+			if i > 1 then
+				o = o .. ";"
+			end
+			o = o .. string.format("--%d:#%02X%02X%02X",i-1,c.r*255,c.g*255,c.b*255)
+		end
+		o = o .. "\"></div></td>"
+	end
+	o = o .. "</tr>\n"
+end
+o = o .. "\t</tbody>\n</table>\n"
+local output = Instance.new("Script")
+output.Name = "StudioStyleGuideColor"
+output.Archivable = false
+output.Disabled = true
+output.Source = o
+output.Parent = game:GetService("ServerStorage")
+game:GetService("Selection"):Set({output})
 
 -->
 
