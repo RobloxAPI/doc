@@ -113,7 +113,8 @@ A document must have one trailing newline at the end of the file.
 
 ### Links
 In order to decouple documents from a particular rendering, several URI schemes
-are defined for referring to other documents or resources.
+are defined for referring to other documents or resources. The non-scheme
+portion of the URI is a path that should be URL-escaped if needed.
 
 <dl>
 
