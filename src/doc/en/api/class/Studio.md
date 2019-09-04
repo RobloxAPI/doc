@@ -25,9 +25,9 @@ Determines whether the hover-over box is animated.
 ### Details
 See [Show Hover Over][SHO] for a description of the hover-over box.
 
-When Animate Hover Over is enabled, the hover-over box will animate between two
-colors determined by [Select Color][SelectColor] and [Hover Over Color][HOC].
-The speed of this animation is determined by [Hover Animate Speed][HAS].
+While enabled, the hover-over box will animate between two colors determined by
+[Select Color][SelectColor] and [Hover Over Color][HOC]. The speed of this
+animation is determined by [Hover Animate Speed][HAS].
 
 ## Auto Closing Brackets
 [ACB]: member:Auto%20Closing%20Brackets
@@ -36,9 +36,10 @@ Determines whether opening brackets are automatically closed while typing in the
 script editor.
 
 ### Details
-While enabled, when a `(`, `[` or `{` character is typed in the script editor,
-the corresponding closing bracket is inserted after the cursor. The character is
-not inserted if there is a non-whitespace character directly after the cursor.
+When a `(`, `[` or `{` character is typed in the script editor while this
+setting is enabled, the corresponding closing bracket is inserted after the
+cursor. The character is not inserted if there is a non-whitespace character
+directly after the cursor.
 
 If an opening bracket is deleted while the cursor is directly between the two
 matching brackets (that is, both characters are adjacent), then both characters
@@ -55,9 +56,9 @@ Determines whether opening strings quotes are automatically closed while typing
 in the script editor.
 
 ### Details
-While enabled, when a `"` or `'` character is typed to open a Lua string in the
-script editor, the corresponding character to close the string is inserted after
-the cursor.
+When a `"` or `'` character is typed to open a Lua string in the script editor
+while this setting is enabled, the corresponding character to close the string
+is inserted after the cursor.
 
 The closing character is inserted only within the scope of a quoted Lua string.
 For example, it will not be inserted while in the scope of a comment or a
@@ -97,41 +98,121 @@ Determines how often a recovery file is made, in minutes.
 ## Auto-Recovery Path
 [ARP]: member:Auto-Recovery%20Path
 
-Determines the directory in the file system to which recovery files will be
+Determines the location in the file system to which recovery files will be
 written.
 
 ## Background Color
 [BC]: member:Background%20Color
 
+Determines the background color in the script editor.
+
 ## Basic Objects Display Mode
 [BODM]: member:Basic%20Objects%20Display%20Mode
+
+Determines the direction of classes listed in the Advanced Objects panel.
+
+### Details
+Classes are listed in multiple columns when Horizontal, and a single column when
+Vertical.
 
 ## Built-in Function Color
 [BiFC]: member:Built-in%20Function%20Color
 
+Determines the color of built-in variables in the script editor.
+
 ## Camera Mouse Wheel Speed
 [CMWS]: member:Camera%20Mouse%20Wheel%20Speed
+
+Determines how many studs the camera moves when scrolling the mouse wheel.
+
+### Details
+The mouse wheel is used to "zoom" the camera. Rather than performing a focal
+zoom or magnification, the camera is translated forwards or backwards. This
+setting determines how many studs the camera moves every tick of the mouse
+wheel. The direction the camera moves is determined by [Camera Zoom to Mouse
+Position][CZtMP].
 
 ## Camera Shift Speed
 [CSS]: member:Camera%20Shift%20Speed
 
+Determines the movement speed of the camera while the shift key is held.
+
+### Details
+The "base speed" of the camera (as determined by [Camera Speed][CS]) is
+multiplied by the value of this setting to determine the "shift speed", in studs
+per second. This will be the camera's velocity when the camera is moving while
+the shift key is held. Unlike the active speed, which accelerates, this speed is
+constant.
+
 ## Camera Speed
 [CS]: member:Camera%20Speed
+
+Determines the base movement speed of the camera.
+
+### Details
+The value of this setting is multiplied by 30, which determines the "base speed"
+of the camera in studs per second.
+
+When the camera starts moving, this base speed is used as the "active speed",
+which is the velocity of the camera while no modifiers (such as [Camera Shift
+Speed][CSS]) are held.
+
+2 seconds after movement starts, the active speed begins accelerating at a rate
+of half the base speed (`CameraSpeed * 30 / 2`), and will continue accelerating
+in the background even while modifiers are held. The active speed resets only
+after the camera stops moving.
+
+Note that the camera is considered moving while any of the camera movement keys
+are held. The camera will still be "moving" even while two opposing keys that
+cancel each other out are held (such as left and right, or forward and back).
 
 ## Camera Zoom to Mouse Position
 [CZtMP]: member:Camera%20Zoom%20to%20Mouse%20Position
 
+Determines the direction in which the camera zooms.
+
+### Details
+When this setting is enabled, the camera will zoom in the direction of the
+position of the mouse cursor. When disabled, the camera will zoom in the
+direction of its [look vector](type:CFrame). <!-- TODO:LookVector -->
+
 ## Clear Output On Start
 [COOS]: member:Clear%20Output%20On%20Start
+
+Determines whether the output panel is cleared when the place runs.
+
+### Details
+When the place is tested with Run or Play Solo while this setting is enabled,
+the output panel will be cleared.
 
 ## Comment Color
 [CC]: member:Comment%20Color
 
+Determines the color of Lua comments in the script editor.
+
 ## DefaultScriptFileDir
 [DSFD]: member:DefaultScriptFileDir
 
+Determines the starting location of the file dialog when choosing a script to
+run.
+
+### Details
+When the Run Script action is activated, a dialog prompts the user to choose a
+file to run as a script. This setting determines the starting location of the
+dialog, and is updated, after a file is selected, to the location of the
+selection.
+
+#### Bugs
+After selecting a file, the displayed value of the setting is not updated,
+although the value will be updated after Studio is restarted.
+
 ## DeprecatedObjectsShown
 [DOS]: member:DeprecatedObjectsShown
+
+Determines whether deprecated APIs are visible in the Object Browser.
+
+### Details
+This setting does not affect autocomplete or menus that insert objects.
 
 ## Device Pairing Code
 [DPC]: member:Device%20Pairing%20Code
@@ -139,8 +220,29 @@ written.
 ## Disable Accurate Play Solo
 [DAPS]: member:Disable%20Accurate%20Play%20Solo
 
+Determines whether Accurate Play Solo is disabled.
+
+### Details
+While this setting is disabled, running Play Solo causes two separate data
+models to be simulated, one each for the client and the server. While enabled,
+Play Solo will simulate both the client and the server in a single data model.
+
+While Accurate Play Solo is running, the viewport will have a colored border
+indicating which data model is being viewed, as well as where the command bar
+runs. The current view can be toggled by an action visible while Play Solo is
+running. In the output panel, messages are marked with the color that
+corresponds to the data model from which the message originates. Green indicates
+the server, and blue indicates the client.
+
 ## Drag Multiple Parts As Single Part
 [DMPASP]: member:Drag%20Multiple%20Parts%20As%20Single%20Part
+
+Causes multiple parts to behave as a single part while being dragged.
+
+### Details
+While this setting is enabled, the collision of dragged parts is determined by
+the bounding box formed by the entire selection. While disabled, collisions are
+performed on each selection individually.
 
 ## Enable Autocomplete
 [EA]: member:Enable%20Autocomplete
@@ -174,9 +276,9 @@ Determines the speed at which the hover-over box animates.
 ### Details
 See [Show Hover Over][SHO] for a description of the hover-over box.
 
-The value is a [HoverAnimateSpeed](enum:HoverAnimateSpeed) enum, which
-determines the rate at which the color of the hover-over box transitions between
-the [Select Color][SelectColor] and the [Hover Over Color][HOC].
+This setting determines the rate at which the color of the hover-over box
+transitions between the [Select Color][SelectColor] and the [Hover Over
+Color][HOC].
 
 ## Hover Over Color
 [HOC]: member:Hover%20Over%20Color
@@ -299,8 +401,8 @@ Sets whether selectable objects in the viewport show an indicator when hovered
 over with the mouse.
 
 ### Details
-If Show Hover Over is enabled, then when the mouse hovers over a selectable 3D
-object in the viewport, a "hover-over" selection box will be shown around the
+When the mouse hovers over a selectable 3D object in the viewport while this
+setting is enabled, a "hover-over" selection box will be shown around the
 object. The appearance of this box can be configured with the following
 settings:
 
@@ -331,10 +433,10 @@ Determines whether automatically inserted characters are skipped over while
 typing.
 
 ### Details
-While enabled, when typing in the script editor, if the typed character is a
-closing bracket or quote that equals the next character after the cursor, and
-the character has a matching opening character, then the cursor moves one
-character forward instead of typing.
+When typing in the script editor while this setting is enabled, if the typed
+character is a closing bracket or quote that equals the next character after the
+cursor, and the character has a matching opening character, then the cursor
+moves one character forward instead of typing.
 
 This is used in conjunction with [Auto Closing Brackets][ACB] and [Auto Closing
 Quotes][ACQ] to skip over characters that have been inserted automatically.
