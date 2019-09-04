@@ -580,6 +580,28 @@ capitalized.</dd>
 
 </dl>
 
+### Media
+This section describes how media resources should be handled.
+
+Plan ahead. Deliberate the content before committing to creating it.
+
+**Do everything possible to reduce the file size.** Optimize. Play with encoding
+settings. Avoid files over 1MB.
+
+The dimensions of an image or video should only be as large as needed for the
+sake of clarity.
+
+An audio or video should only be as long as needed to get the point across.
+Video used purely for visual demonstration must not have an audio track.
+
+Images must be encoded as either PNG or JPEG. **GIFs are forbidden.** Video must
+be encoded as MPEG-4/H.264. Audio (including within video) must be encoded as
+MP3.
+
+Markdown does not support audio/video elements, so they must be inlined via
+HTML. Preloading should be completely disabled. **Audio and video must never
+auto-play.**
+
 ### Other
 This section lists other minor details to consider.
 
