@@ -217,6 +217,8 @@ This setting does not affect autocomplete or menus that insert objects.
 ## Device Pairing Code
 [DPC]: member:Device%20Pairing%20Code
 
+A code used to associate Studio sessions with a mobile device.
+
 ## Disable Accurate Play Solo
 [DAPS]: member:Disable%20Accurate%20Play%20Solo
 
@@ -247,26 +249,58 @@ performed on each selection individually.
 ## Enable Autocomplete
 [EA]: member:Enable%20Autocomplete
 
+Determines whether code completion is enabled while typing in the script editor
+or command bar.
+
+### Details
+When the user types in the script editor or command bar while this setting is
+enabled, a menu will pop up next to the cursor, displaying a list of words
+relevant to the context of what has been typed. `ctrl+space` can also be used to
+display the menu. While displayed, the up and down arrow keys can be used to
+highlight an element, or the user may continue typing to further reduce the
+list. When the user presses enter on a highlighted element, the rest of the
+typed word will be filled in with that element.
+
+Several kinds of elements can be completed:
+
+- Lua keywords.
+- built-in shared variables.
+- Local and global variables.
+- Indices of such variables, including members and children of objects.
+
+Variables that cannot be inferred statically cannot be completed. For example, a
+function parameter can have an arbitrary value passed to it, so its value can
+only be determined at runtime when the function is actually called.
+
 ## Enable CoreScript Debugger
 [ECSD]: member:Enable%20CoreScript%20Debugger
 
 ## Enable Intellisense
 [EI]: member:Enable%20Intellisense
 
+Replaced by [Enable Autocomplete][EA].
+
 ## Error Color
 [EC]: member:Error%20Color
+
+Determines the color of text decorations indicating an error in the script
+editor.
 
 ## Find Selection Background Color
 [FSBC]: member:Find%20Selection%20Background%20Color
 
+Determines the background color of text highlighted by the Find action.
+
 ## Font
 [Font]: member:Font
+
+Determines the script editor font.
 
 ## GetAvailableThemes
 [GAT]: member:GetAvailableThemes
 
-Returns a list of available studio themes as a list of
-[StudioThemes](class:StudioTheme) objects.
+Returns available studio themes as a list of [StudioThemes](class:StudioTheme)
+objects.
 
 ## Hover Animate Speed
 [HAS]: member:Hover%20Animate%20Speed
@@ -294,38 +328,96 @@ between the [Select Color][SelectColor] and this color.
 ## Keyword Color
 [KC]: member:Keyword%20Color
 
+Determines the color of Lua keywords in the script editor.
+
 ## Language
 [Language]: member:Language
+
+Determines the language displayed in the Studio interface.
+
+### Details
+Studio must be restarted for changes to this setting to take effect.
 
 ## Line Thickness
 [LT]: member:Line%20Thickness
 
+Determines the thickness, in studs, of the box displayed around the
+[PrimaryPart](class:Model/PrimaryPart) while a [Model](class:Model) is selected.
+
+### Details
+The value has an interval of `(0, 0.05)`, or a minimum limit of 0 exclusive, and
+a maximum limit of 0.05 exclusive.
+
+#### Bugs
+Setting the value to 0 will display the error used for the maximum limit, rather
+than the minimum.
+
 ## LuaDebuggerEnabled
 [LDE]: member:LuaDebuggerEnabled
+
+Determines whether the Lua debugger is enabled or disabled when Studio starts
+up.
+
+### Details
+Studio must be restarted for changes to the debugger to take effect.
 
 ## LuaDebuggerEnabledAtStartup
 [LDEAS]: member:LuaDebuggerEnabledAtStartup
 
+Returns whether the Lua debugger is currently enabled.
+
+### Details
+This value indicates the enabled state of the debugger in the current session,
+regardless of the value of [LuaDebuggerEnabled][LDE].
+
 ## Matching Word Background Color
 [MWBC]: member:Matching%20Word%20Background%20Color
+
+Determines the background color of matched words in the script editor.
+
+### Details
+When a word is selected in the script editor while this setting is enabled,
+other occurrences of the word in the script will be highlighted with this color.
 
 ## Maximum Output Lines
 [MOL]: member:Maximum%20Output%20Lines
 
+Determines the number of lines that persist in the Output panel.
+
+### Details
+A value of 0 or less causes no limit to be enforced. When set to a value less
+than the current, the oldest lines in the Output panel will be truncated.
+
 ## Number Color
 [NC]: member:Number%20Color
+
+Determines the color of Lua numbers in the script editor.
 
 ## Only Play Audio from Window in Focus
 [OPAfWiF]: member:Only%20Play%20Audio%20from%20Window%20in%20Focus
 
+Determines whether audio will be played only from the Studio window currently in
+focus.
+
 ## Operator Color
 [OC]: member:Operator%20Color
+
+Determines the color of Lua operators in the script editor.
 
 ## Output Font
 [OutputFont]: member:Output%20Font
 
+Determines the Output panel font.
+
 ## Output Layout Mode
 [OLM]: member:Output%20Layout%20Mode
+
+Determines the layout of vertical panels versus horizontal panels.
+
+### Details
+When set to Vertical, panels on the left and right sides of the screen will be
+laid out with priority over panels on the bottom of the screen. When set to
+Horizontal, panels on the bottom of the screen will have priority.
 
 ## OverrideCoreScripts
 [OCS]: member:OverrideCoreScripts
@@ -341,6 +433,14 @@ between the [Select Color][SelectColor] and this color.
 
 ## Preprocessor Color
 [PC]: member:Preprocessor%20Color
+
+The determines the color of preprocessors in the script editor.
+
+### Details
+Older versions of Lua (up to 3.2) had a
+[preprocessor](https://www.lua.org/manual/3.2/manual.html#4.2), in which lines
+beginning with a `$` character were interpreted as directives. The preprocessor
+was removed in version 4.0, so this value is unused.
 
 ## RecentSavesDir
 [RSD]: member:RecentSavesDir
@@ -379,8 +479,12 @@ Determines the color of the box displayed around the
 ## Selection Background Color
 [SBC]: member:Selection%20Background%20Color
 
+Determines the background color of selected text in the script editor.
+
 ## Selection Color
 [SionC]: member:Selection%20Color
+
+Determines the color of selected text in the script editor.
 
 ## Server Audio Behavior
 [SAB]: member:Server%20Audio%20Behavior
@@ -444,11 +548,15 @@ Quotes][ACQ] to skip over characters that have been inserted automatically.
 ## String Color
 [StringColor]: member:String%20Color
 
+Determines the color of Lua strings in the script editor.
+
 ## Tab Width
 [TabWidth]: member:Tab%20Width
 
 ## Text Color
 [TextColor]: member:Text%20Color
+
+Determines the color of general text in the script editor.
 
 ## Text Wrapping
 [TextWrapping]: member:Text%20Wrapping
@@ -475,3 +583,5 @@ Fires after the [Theme][Theme] property changes.
 ## Warning Color
 [WC]: member:Warning%20Color
 
+Determines the color of text decorations indicating a warning in the script
+editor.
