@@ -439,9 +439,9 @@ Avoid images containing text. If an image requires explanation, write it in the
 document near the image.
 
 ### Member parameters
-Any time a member parameter is referred to, *italics* must be used. The
-capitalization of the parameter must be as given by the API, even at the start
-of sentences.
+Any time a member parameter is referred to, *italics* must be used. To avoid
+confusion, italics should be used *only* for parameters. The capitalization of
+the parameter must be as given by the API, even at the start of sentences.
 
 ```markdown
 ## FindFirstChild
