@@ -1,0 +1,76 @@
+# Contributing
+This document provides information on contributing to the RobloxAPI/doc
+repository.
+
+## Submitting issues
+Issues usually fall into one of a number of types:
+
+- **enhancement**: Something could be improved. Feature requests.
+- **error**: Something is incorrect. Usually involves taking a direct action to
+  solve the problem.
+- **question**: Something is unclear. Usually results in a clarification of the
+  subject.
+
+Issues also usually have a broad subject:
+- **content**: Regarding the actual content of an API document.
+- **syntax**: Regarding spelling, grammar, and so on. Separate from content,
+  because these are usually minor.
+- **meta**: Regarding the project itself. This can involve meta-documents, like
+  the guidelines, or formatting that affects all API documents.
+
+Though not required, the submitter will benefit by focusing their issue on a
+type and subject as described above.
+
+Other statuses that may appear:
+- **duplicate**: The same issue was already submitted previously.
+- **needs info**: Not currently actionable; more information is needed from the
+  submitter.
+- **invalid**: Closed due to being irrelevant to the project or otherwise
+  unsuitable.
+- **aged**: Closed due to long period of inaction. Can be reopened if an action
+  is taken since.
+- **grouped**: Closed due to containing multiple issues within a single
+  submission. Each issue should be resubmitted individually.
+
+When submitting an issue regarding a specific document, the path to the document
+should be included in the title. For example:
+
+> ### [api/class/Instance] Incorrect description of ChildAdded
+
+## Creating pull requests
+The submitter may also make pull requests to directly address an issue
+themselves.
+
+### Submitting documents
+When submitting a pull request regarding a specific document, the path to the
+document should be included in the title. For example:
+
+> ### [api/class/Instance] Add example for ChildAdded
+
+A writer may submit a complete document by creating a pull request against the
+`master` branch. This pull request will be reviewed by a member of the project,
+who will check the content for accuracy, wording, and completeness. The reviewer
+may make suggestions for improvements, or make edits against the pull request
+directly. The submitter should work with the reviewer to make the document
+pristine. Once the document meets standards, it will be merged.
+
+A writer may also submit partial documents. If a branch for a partial document
+exists, then the writer may submit a pull request against that branch directly.
+It will be compared against the content that already exists in that branch.
+
+GitHub does not allow pull requests to be made against branches that do not
+exist. For this reason, the `partial` branch exists. Pull requests made against
+this branch indicate to reviewers that the submitted document is incomplete, and
+the repository does not yet have a branch for that document. After the document
+is reviewed and refined, the reviewer will create a new branch and redirect the
+pull request to it.
+
+Attempting to submit multiple documents within a single pull request is invalid.
+Such pull requests will be closed, and the writer should resubmit each document
+individually.
+
+See the [stages](meta/stages.md) document for more information about partial
+documents.
+
+See the [branches](meta/branches.md) document for more information about
+branches in this repository.
