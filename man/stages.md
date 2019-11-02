@@ -27,8 +27,32 @@ Occasionally, media works better than words. If it takes significantly more
 effort to write a description than it does to take a screenshot, it's okay to
 just take a screenshot.
 
+All entities, except for enum items, must have a summary and detailed
+description. Because enum items can be either numerous or lacking significant
+information, they are exempt from this. Even so, enum items that need them
+should have them.
+
+Here are some examples of enums to get an idea of whether an enum item should
+have a description:
+
+- **KeyCode**: has hundreds of items, all of which can be described at once in
+  the details of the enum itself.
+	- No Summary; no Details.
+- **NormalId**: has relatively few items, but all of them can still be described
+  at once in the enum details.
+	- No Summary; no Details.
+- **StudioStyleGuideColor**: has numerous items, each worthy of having at least
+  a summary, but any more than that would be excessive.
+	- Has Summary; no Details.
+- **EasingStyle**: items have distinct behaviors, each of which could be
+  described in detail.
+	- Has Summary and Details
+
+If an enum item does have Details, then it must also have a Summary.
+
 **Conditions**: All entities within a document must have a summary and a
-detailed description. Behaviors must be verified and described accurately.
+detailed description as appropriate for the entity. Behaviors must be verified
+and described accurately.
 
 **Life cycle**:
 1. Make. Write words. Describe the behavior of entities. Verify the correctness
