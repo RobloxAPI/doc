@@ -28,9 +28,13 @@ effort to write a description than it does to take a screenshot, it's okay to
 just take a screenshot.
 
 All entities, except for enum items, must have a summary and detailed
-description. Because enum items can be either numerous or lacking significant
-information, they are exempt from this. Even so, enum items that need them
-should have them.
+description (Summary and Details sections). However, if an entity is already
+completely described by the summary, and further details would just be
+redundant, then the entity is exempt from having a Details section.
+
+Because enum items can be either numerous or lacking significant information,
+they may be exempt from having a summary or details. Even so, enum items that
+need them should have them.
 
 Here are some examples of enums to get an idea of whether an enum item should
 have a description:
