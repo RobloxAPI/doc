@@ -69,9 +69,9 @@ following error is thrown:
 	Http requests can only be executed by game server
 
 The URL schemes allowed by HttpService are `http` and `https`. Domains are
-filtered using a blacklist; requests to any URL are allowed, while requests to
-Roblox domains are disallowed. If a URL is disallowed or otherwise invalid, then
-the following error will be thrown:
+filtered using a blacklist; requests to Roblox domains are disallowed, while
+requests to any other domains are allowed. If a URL is disallowed or otherwise
+invalid, then the following error will be thrown:
 
 	URL: Trust check failed
 
