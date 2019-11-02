@@ -1,6 +1,10 @@
 # Summary
 Configures settings specific to Roblox Studio.
 
+# Details
+The Studio class only exists on the Studio build of Roblox. As such, it is not
+relevant for game clients or servers.
+
 # Members
 ## Always Save Script Changes
 [ASSC]: member:Always%20Save%20Script%20Changes
