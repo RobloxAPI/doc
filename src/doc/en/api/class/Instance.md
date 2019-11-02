@@ -1,3 +1,72 @@
+# Summary
+The root class of all classes in the API.
+
+# Details
+
+## Hierarchy
+Objects are arranged in a tree structure. An object can have zero or more
+**child** objects, which are below it in the tree. Conversely, an object can
+have at most one **parent** object, which is above it in the tree. The **root**
+of a tree can have children, but has no parent. Objects that share the same
+parent are referred to as **siblings**.
+
+An **ancestor** is any object that is reachable by repeatedly moving from child
+to parent. That is, an ancestor is the parent of an object, or the parent's
+parent, and so on, all the way to the root of the tree. A **descendant** is any
+object that is reachable by repeatedly moving from parent to child. That is, a
+descendant is a child of an object, or a child of the child, and so on.
+
+## References
+Whenever Lua accesses an object for the first time, a userdata is created. This
+userdata acts as a "proxy" or "bridge" that enables the object to be accessed in
+Lua. The userdata will be reused while it exists, and recreated when it doesn't,
+which is a process that is meant to be completely opaque to Lua. For all intents
+and purposes, the userdata *is* the object. As such, almost no distinction will
+be made between the two in this reference.
+
+In regards to garbage collection, Lua's garbage collector has no knowledge of
+the object, and does not affect the object in any way. The memory allocated to
+the object is managed by a separate, internal system. On the other hand, the
+userdata *is* known by the garbage collector, and may therefore be collected
+when it has no more strong references in Lua, just as any other Lua value.
+
+It must be noted that an object makes no strong references to its userdata. A
+consequence of this is that, when there are only weak references to the
+userdata, **the userdata can be garbage collected while the object is still
+accessible.** For example, if the userdata's only reference is in a weak table,
+and the object is in the game tree, then userdata will be collected, removing it
+from the weak table. Despite this, the object still exists in the game tree, and
+can be accessed as usual.
+
+# Examples
+Demonstration of an object's weak reference behavior. An object's userdata can
+be garbage collected while the object is in the game tree.
+
+```lua
+-- Table with weak value references.
+local weakTable = setmetatable({}, {__mode='v'})
+
+-- Create an object, then add it to the game tree and the weak table.
+local object = Instance.new("BoolValue")
+object.Parent = workspace
+weakTable[1] = object
+object = nil -- Remove strong reference to the object.
+
+print("Reference:", weakTable[1])
+--> Reference: Value (userdata still exists)
+
+-- Wait until the userdata is collected.
+while #weakTable > 0 do
+	wait()
+end
+
+print("Reference:", weakTable[1])
+--> Reference: nil (userdata was collected)
+
+print("Object:", workspace.Value)
+--> Object: Value (object still exists)
+```
+
 # Members
 
 ## AncestryChanged
