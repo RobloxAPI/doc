@@ -56,7 +56,7 @@ Requests are sent with a specific user agent that depends on the current peer:
 
 Peer   | User agent
 -------|-----------
-Server | `RobloxGameCloud/1.0 (+http:www.roblox.com)`
+Server | `RobloxGameCloud/1.0 (+http://www.roblox.com)`
 Studio | `RobloxStudio/WinInet`
 
 Header names are case-insensitive. If multiple equivalent headers are specified,
