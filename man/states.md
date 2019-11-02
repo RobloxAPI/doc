@@ -4,7 +4,9 @@ entities. Each entity within a document has one of the following **states** of
 completeness:
 
 - `absent`: The entity has no presence within the document. The primary entity
-  never has this state.
+  has this state when the document only contains the section for secondary
+  entities (the *Members* section). Likewise, secondary entities are still
+  considered absent if they have a heading, but the section is otherwise empty.
 - `dirty`: The entity has a description, but the content is incomplete or
   unverified according to the document's current [stage](stages.md).
 - `pristine`: The description of the entity is complete and verified according
