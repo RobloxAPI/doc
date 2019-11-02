@@ -30,10 +30,3 @@ formula (in radians):
 
 ## Throtle
 Replaced by Throttle.
-
-## Action3
-Performs Action3.
-
-### Details
-Action3 does something. Who knows what.
-
