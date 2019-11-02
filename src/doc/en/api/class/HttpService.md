@@ -144,6 +144,9 @@ as an error:
 
 Where `000` is the status code, and `MESSAGE` is the status message.
 
+#### Bugs
+`Cache-Control` is set to `no-cache` regardless of the *nocache* argument.
+
 ## GetHttpEnabled
 ## HttpEnabled
 Determines whether HttpService can make requests.
