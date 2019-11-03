@@ -187,6 +187,15 @@ as an error:
 
 Where `000` is the status code, and `MESSAGE` is the status message.
 
+The length of *data* cannot be greater than or equal to 1024KB (maximum is
+1,023,999 bytes). If *data* is too large, then the following error will be
+thrown:
+
+	Post data too large. Limit: 1024 KB. Post size: SIZE KB
+
+Where `SIZE` is the length of *data* in kilobytes. Note that [RequestAsync][RA]
+does not have this limit.
+
 [HCT]: enum:HttpContentType
 
 ## RequestAsync
