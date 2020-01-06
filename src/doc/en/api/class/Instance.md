@@ -88,6 +88,28 @@ replicate from a client to the server (and then to each other client).
 [RF]: class:ReplicatedFirst
 [SS]: class:ServerStorage
 
+## Constructors
+
+### `Instance.new(className: string, parent: Instance?): Instance` {#ctor-new}
+Returns a new instance of a class. *className* is the name of the class.
+*parent* is an optional object to which the [Parent](member:Parent) property
+will be set before the object is returned. If unspecified, then the object's
+Parent will be nil.
+
+Per class, each property of the instance is initialized with a default value.
+The default value of an inherited property depends on the current class (for
+example, the [Name](member:Name) property of a [Seat](class:Seat) initializes as
+"Seat" rather than "Part" or "Instance"). Default values are considered a part
+of a class's API, and so will not change arbitrarily over time.
+
+If an instance of the given class cannot be created, then the following error is
+thrown:
+
+	Unable to create an Instance of type "CLASS"
+
+Where `CLASS` is the name of the given class. Existing classes that cannot be
+created include abstract classes, services, and classes tagged as NotCreatable.
+
 # Examples
 Demonstration of an object's weak reference behavior. An object's userdata can
 be garbage collected while the object is in the game tree.
