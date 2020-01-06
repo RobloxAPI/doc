@@ -38,6 +38,56 @@ and the object is in the game tree, then userdata will be collected, removing it
 from the weak table. Despite this, the object still exists in the game tree, and
 can be accessed as usual.
 
+## Replication
+For each connected peer, a particular object will usually have a copy of itself
+that exists on the peer. When an object is "replicated", each of these copies
+are being synchronized across the network. Several aspects of an object are
+replicated:
+
+- The presence or absence of the object.
+- The properties of the object.
+- The children of the object.
+
+From the perspective of the hierarchy, replication behaves as though the object
+is being added, removed, or modified. Events will fire in response to such
+replicated changes.
+
+When an object exists on the server, changes to the object on the server are
+replicated to each client.
+
+When an object exists on the server, but its class has the NotReplicated tag,
+then no aspects of the object are replicated. This status is "inherited" by the
+object's parent. That is, if an object is tagged as NotReplicated, then its
+descendants will also not replicate.
+
+Note that, while two non-replicating objects (one on each peer) may be similar,
+they are not considered the same object. For example, [ServerStorage][SS] will
+exist on both the server and a client. This is because of how singleton services
+are initialized, and not because ServerStorage has somehow been replicated
+partially.
+
+When an object exists on the server, and the object's class has the
+PlayerReplicated tag, then changes to the object are replicated only to a
+specific client.
+
+When an object exists only on the client, changes are generally never
+replicated. In previous versions, changes on a client were allowed to replicate
+to the server (and then to each other client). Because of security concerns, it
+later became possible to disable this behavior with the [FilteringEnabled][FE]
+property. Eventually, this toggle was removed entirely, and the behavior became
+generally disallowed.
+
+Physics replication is a separate system with its own behaviors.
+
+Special exceptions may exist. For example, [ReplicatedFirst][RF] replicates from
+the server to a client exactly once, per client, after the client connects.
+Another example is player characters: certain aspects of a character can
+replicate from a client to the server (and then to each other client).
+
+[FE]: class:Workspace/FilteringEnabled
+[RF]: class:ReplicatedFirst
+[SS]: class:ServerStorage
+
 # Examples
 Demonstration of an object's weak reference behavior. An object's userdata can
 be garbage collected while the object is in the game tree.
