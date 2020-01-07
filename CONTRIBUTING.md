@@ -51,7 +51,7 @@ A writer may submit a complete document by creating a pull request against the
 who will check the content for accuracy, wording, and completeness. The reviewer
 may suggest improvements, or make edits against the pull request directly. The
 submitter should work with the reviewer to make the content pristine. The
-document will be merged once it meets standards. See the [stages](stages.md)
+document will be merged once it meets standards. See the [stages](man/stages.md)
 page for more information on requirements.
 
 A writer may also submit partial documents, or drafts. Drafts live in branches
@@ -70,5 +70,5 @@ Attempting to submit multiple documents within a single pull request is invalid.
 Such pull requests will be closed, and the writer should resubmit each document
 individually.
 
-See the [branches](meta/branches.md) page for more information about branches in
+See the [branches](man/branches.md) page for more information about branches in
 this repository.
