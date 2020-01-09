@@ -88,9 +88,9 @@ replicate from a client to the server (and then to each other client).
 [RF]: class:ReplicatedFirst
 [SS]: class:ServerStorage
 
-## Constructors
+# Constructors
 
-### `Instance.new(className: string, parent: Instance?): Instance` {#ctor-new}
+## `Instance.new(className: string, parent: Instance?): Instance`
 Returns a new instance of a class. *className* is the name of the class.
 *parent* is an optional object to which the [Parent](member:Parent) property
 will be set before the object is returned. If unspecified, then the object's
