@@ -361,12 +361,10 @@ type declarations are formatted.
 ## `Lerp(goal: CFrame, alpha: number): CFrame`
 ```
 
-Because of the unusual naming scheme, such headings may use the explicit
-identifier syntax to define a consistent heading identifier:
-
-```markdown
-## `Lerp(goal: CFrame, alpha: number): CFrame` {#method-Lerp}
-```
+Because of the unusual naming scheme, such headings are parsed in a particular
+way to generate consistent identifiers. For an identifier to be properly
+generated, the syntax of the heading must be correct, and the heading must be
+under the proper section.
 
 Subsections of a component section are the usual Summary, Details, and Examples,
 as described previously.
@@ -381,87 +379,119 @@ If a constructor returns a value of the current type, then the return type may
 be omitted in the declaration (`CFrame.new()` instead of `CFrame.new():
 CFrame`).
 
-The identifier of the heading begins with `ctor-` followed by the name of the
-constructor (case-sensitive). If a constructor has multiple declarations, then a
-short, disambiguating description must be appended. The first or least specific
-declaration can omit the description.
+The identifier of a heading begins with `ctor-` followed by the case-sensitive
+name of the constructor. When a constructor has multiple definitions, the names
+of each argument are also appended.
 
 ```markdown
-## `CFrame.new()` {#ctor-new}
-## `CFrame.new(position: Vector3)` {#ctor-new-position}
-## `CFrame.new(position: Vector3, lookAt: Vector3)` {#ctor-new-look}
-## `CFrame.new(x: number, y: number, z: number)` {#ctor-new-xyz}
-## `CFrame.Angles(rx: number, ry: number, rz: number)` {#ctor-Angles}
+# Constructors
+## `CFrame.new()`
+## `CFrame.new(position: Vector3)`
+## `CFrame.new(position: Vector3, lookAt: Vector3)`
+## `CFrame.new(x: number, y: number, z: number)`
+## `CFrame.Angles(rx: number, ry: number, rz: number)`
 ```
+
+In a final rendering, these would produce the following identifiers:
+- `doc-constructors`
+- `doc-ctor-new`
+- `doc-ctor-new-position`
+- `doc-ctor-new-position-lookAt`
+- `doc-ctor-new-x-y-z`
+- `doc-ctor-new-rx-ry-rz`
+- `doc-ctor-Angles`
 
 #### Fields
 The Fields top-level section lists the fields of the type.
 
-The identifier of the heading begins with `field-` followed by the name of the
-field (case-sensitive).
+The identifier of a heading begins with `field-` followed by the case-sensitive
+name of the field.
 
 ```markdown
-## `X: number` {#field-X}
-## `Y: number` {#field-Y}
-## `Z: number` {#field-Z}
-## `Position: Vector3` {#field-Position}
-## `LookVector: Vector3` {#field-LookVector}
+# Fields
+## `X: number`
+## `Y: number`
+## `Z: number`
+## `Position: Vector3`
+## `LookVector: Vector3`
 ```
+
+In a final rendering, these would produce the following identifiers:
+- `doc-fields`
+- `doc-field-X`
+- `doc-field-Y`
+- `doc-field-Z`
+- `doc-field-Position`
+- `doc-field-LookVector`
 
 #### Methods
 The Methods top-level section lists the methods of the type.
 
-The identifier of the heading begins with `method-` followed by the name of the
-method (case-sensitive).
+The identifier of a heading begins with `method-` followed by the case-sensitive
+name of the method.
 
 ```markdown
-## `Inverse(): CFrame` {#method-Inverse}
-## `Lerp(goal: CFrame, alpha: number): CFrame` {#method-Lerp}
-## `ToWorldSpace(cf: CFrame): CFrame` {#method-ToWorldSpace}
-## `ToObjectSpace(cf: CFrame): CFrame` {#method-ToObjectSpace}
+# Methods
+## `Inverse(): CFrame`
+## `Lerp(goal: CFrame, alpha: number): CFrame`
+## `ToWorldSpace(cf: CFrame): CFrame`
+## `ToObjectSpace(cf: CFrame): CFrame`
 ```
+
+In a final rendering, these would produce the following identifiers:
+- `doc-methods`
+- `doc-method-Inverse`
+- `doc-method-Lerp`
+- `doc-method-ToWorldSpace`
+- `doc-method-ToObjectSpace`
 
 #### Operators
 The Operators top-level section lists the operators of the type.
 
-Each operator name is the syntax of the operator on the type name, the type of
-other operands (if applicable), followed by the type of the result.
+Each operator has its own syntax. Generally, the name of the type is used with
+the operator, along with any other operands, if applicable, followed by the type
+of the resulting value. In particular, the syntax of the `call` operator is the
+same as the method syntax.
 
-The identifier of the heading begins with `op-` followed by the metamethod name,
-then the other operand, if applicable. If necessary, a short, disambiguating
-description can be appended.
+The identifier of a heading begins with `op-` followed by the metamethod name,
+then the other operand, if applicable.
 
 ```markdown
-Identifiers on binary operators usually use the other operand.
-## `Type + Operand : Result` {#op-add-Operand}
-## `Type - Operand : Result` {#op-sub-Operand}
-## `Type * Operand : Result` {#op-mul-Operand}
-## `Type / Operand : Result` {#op-div-Operand}
-## `Type % Operand : Result` {#op-mod-Operand}
-## `Type ^ Operand : Result` {#op-pow-Operand}
-## `Type .. Operand : Result` {#op-concat-Operand}
-## `Type == Operand : Result` {#op-eq-Operand}
-## `Type < Operand : Result` {#op-lt-Operand}
-## `Type <= Operand : Result` {#op-le-Operand}
+Identifiers on binary operators use the second operand.
+## `Type + Operand : Result`  <!-- ID: doc-op-add-Operand -->
+## `Type - Operand : Result`  <!-- ID: doc-op-sub-Operand -->
+## `Type * Operand : Result`  <!-- ID: doc-op-mul-Operand -->
+## `Type / Operand : Result`  <!-- ID: doc-op-div-Operand -->
+## `Type % Operand : Result`  <!-- ID: doc-op-mod-Operand -->
+## `Type ^ Operand : Result`  <!-- ID: doc-op-pow-Operand -->
+## `Type .. Operand : Result` <!-- ID: doc-op-concat-Operand -->
+## `Type == Operand : Result` <!-- ID: doc-op-eq-Operand -->
+## `Type < Operand : Result`  <!-- ID: doc-op-lt-Operand -->
+## `Type <= Operand : Result` <!-- ID: doc-op-le-Operand -->
 
-Identifiers on unary operators usually have no extra description.
-## `-Type : Result` {#op-unm}
-## `#Type : Result` {#op-len}
-
-Identifiers on complex operators usually have an extra description, but only if
-disambiguation is needed.
-## `Type[Operand] : Result` {#op-index}
-## `Type[OperandA] = OperandB : Result` {#op-newindex}
-## `Type(Parameters) : Result` {#op-call}
+Identifiers on other operators have no extra information.
+## `-Type : Result`            <!-- doc-op-unm -->
+## `#Type : Result`            <!-- doc-op-len -->
+## `Type[Operand] : Result`    <!-- doc-op-index -->
+## `Type[OperandA] = OperandB` <!-- doc-op-newindex -->
+## `Type(Parameters) : Result` <!-- doc-op-call -->
 ```
 
 Real example:
 ```markdown
-## `CFrame * CFrame : CFrame` {#op-mul-CFrame}
-## `CFrame * Vector3 : Vector3` {#op-mul-Vector3}
-## `CFrame + Vector3 : CFrame` {#op-add-Vector3}
-## `CFrame - Vector3 : CFrame` {#op-sub-Vector3}
+# Operators
+## `CFrame * CFrame : CFrame`
+## `CFrame * Vector3 : Vector3`
+## `CFrame + Vector3 : CFrame`
+## `CFrame - Vector3 : CFrame`
 ```
+
+In a final rendering, these would produce the following identifiers:
+- `doc-operators`
+- `doc-op-mul-CFrame`
+- `doc-op-mul-Vector3`
+- `doc-op-add-Vector3`
+- `doc-op-sub-Vector3`
 
 ## Grammar
 Avoid personal language. Do not speak to the reader ("you") or about the writer
