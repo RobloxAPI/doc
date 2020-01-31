@@ -222,7 +222,7 @@ The following **BrickColor table** lists the defined colors:
 
 <!--
 
-local function RGBtoHue(r, g, b)
+local function hue(r, g, b)
 	local max = math.max(r, g, b)
 	local dmax = max - math.min(r, g, b)
 	local hue = 0
@@ -247,35 +247,42 @@ local function RGBtoHue(r, g, b)
 end
 
 local brickColors = {}
-local i = 0
-local bad = 0
-while true do
-	local bc = BrickColor.new(i)
-	if bc.Number == i then
-		table.insert(brickColors, bc)
-		bad = 0
-	else
-		bad = bad + 1
+do
+	local i = 0
+	local bad = 0
+	while true do
+		local bc = BrickColor.new(i)
+		if bc.Number == i then
+			table.insert(brickColors, bc)
+			bad = 0
+		else
+			bad = bad + 1
+		end
+		if bad >= 2^10 then
+			break
+		end
+		i = i + 1
 	end
-	if bad >= 2^10 then
-		break
-	end
-	i = i + 1
 end
+
 local palette = {}
-i = 0
-while true do
-	local ok, result = pcall(BrickColor.palette, i)
-	if not ok then
-		break
+do
+	local i = 0
+	while true do
+		local ok, result = pcall(BrickColor.palette, i)
+		if not ok then
+			break
+		end
+		palette[result.Number] = i
+		i = i + 1
 	end
-	palette[result.Number] = i
-	i = i + 1
 end
+
+local max = 0
 for i = 1, #brickColors do
 	local bc = brickColors[i]
 	brickColors[i] = {
-		Color = {bc.r, bc.g, bc.b},
+		Color = hue(bc.r, bc.g, bc.b),
 		Color8 = {(math.modf(bc.r*255)), (math.modf(bc.g*255)), (math.modf(bc.b*255))},
 		IndexColor = BrickColor.new(bc.r, bc.g, bc.b).Number,
 		IndexColor3 = BrickColor.new(bc.Color).Number,
@@ -285,49 +292,44 @@ for i = 1, #brickColors do
 		Number = bc.Number,
 		Palette = palette[bc.Number],
 	}
-end
-local data = {
-	BrickColors = brickColors,
-}
-
-local max = 0
-for _, color in pairs(brickColors) do
-	if #color.Name > max then
-		max = #color.Name
+	if #bc.Name > max then
+		max = #bc.Name
 	end
 end
+
 local o = "<table>\n\t<thead><tr><th align=\"right\">Number</th><th>Name</th><th>Color (rgb)</th><th>Color (hex)</th><th>Color</th><th align=\"right\">Palette Index</th><th>Notes</th></tr></thead>\n\t<tbody>\n"
-for _, color in pairs(brickColors) do
-	o = o .. "\t\t<tr id=\"doc-brickcolor-" .. color.Number .. "\"><td align=\"right\">" .. color.Number .. "</td>"
-	o = o .. "<td>" .. color.Name .. "</td>" .. string.rep(" ", max - #color.Name)
-	o = o .. "<td>" .. string.format("%d, %d, %d", unpack(color.Color8)) .. "</td>"
-	local hex = string.format("#%02X%02X%02X", unpack(color.Color8))
+for _, bc in pairs(brickColors) do
+	o = o .. "\t\t<tr id=\"doc-brickcolor-" .. bc.Number .. "\"><td align=\"right\">" .. bc.Number .. "</td>"
+	o = o .. "<td>" .. bc.Name .. "</td>" .. string.rep(" ", max - #bc.Name)
+	o = o .. "<td>" .. string.format("%d, %d, %d", unpack(bc.Color8)) .. "</td>"
+	local hex = string.format("#%02X%02X%02X", unpack(bc.Color8))
 	o = o .. "<td>" .. hex .. "</td>"
-	o = o .. "<td><div class=\"swatch\" data-value=\"" .. string.format("%0.9g", RGBtoHue(unpack(color.Color))) .. "\" style=\"--0:" .. hex .. "\"></div></td>"
-	if color.Palette then
-		o = o .. "<td align=\"right\">" .. color.Palette .. "</td>"
+	o = o .. "<td><div class=\"swatch\" data-value=\"" .. string.format("%0.9g", bc.Color) .. "\" style=\"--0:" .. hex .. "\"></div></td>"
+	if bc.Palette then
+		o = o .. "<td align=\"right\">" .. bc.Palette .. "</td>"
 	else
 		o = o .. "<td align=\"right\"></td>"
 	end
 	local conflict = nil
-	if color.IndexName ~= color.Number then
-		conflict = color.IndexName
+	if bc.IndexName ~= bc.Number then
+		conflict = bc.IndexName
 	else
 		for _, c in pairs(brickColors) do
-			if c.Number ~= color.Number and c.IndexName == color.Number then
+			if c.Number ~= bc.Number and c.IndexName == bc.Number then
 				conflict = c.Number
 				break
 			end
 		end
 	end
 	if conflict then
-		o = o .. string.format("<td>Shares Name with <a href=\"#doc-brickcolor-%d\">%d</a> (<a href=\"#doc-ctor-new-name\">BrickColor.new</a> returns %d)</td>",conflict,conflict,color.IndexName)
+		o = o .. string.format("<td>Shares Name with <a href=\"#doc-brickcolor-%d\">%d</a> (<a href=\"#doc-ctor-new-name\">BrickColor.new</a> returns %d)</td>",conflict,conflict,bc.IndexName)
 	else
 		o = o .. "<td></td>"
 	end
 	o = o .. "</tr>\n"
 end
 o = o .. "\t</tbody>\n</table>\n"
+
 local output = Instance.new("Script")
 output.Name = "BrickColors"
 output.Archivable = false
