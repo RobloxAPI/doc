@@ -1,5 +1,6 @@
 # Contributing
-This page provides information on contributing to the RobloxAPI/doc repository.
+This page provides information on contributing to the Roblox API Reference
+Documentation project.
 
 ## Submitting issues
 Issues usually fall into one of a number of types:
