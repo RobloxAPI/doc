@@ -476,9 +476,9 @@ Identifiers on binary operators use the second operand.
 ## `Type % Operand : Result`  <!-- ID: doc-op-mod-Operand -->
 ## `Type ^ Operand : Result`  <!-- ID: doc-op-pow-Operand -->
 ## `Type .. Operand : Result` <!-- ID: doc-op-concat-Operand -->
-## `Type == Operand : Result` <!-- ID: doc-op-eq-Operand -->
-## `Type < Operand : Result`  <!-- ID: doc-op-lt-Operand -->
-## `Type <= Operand : Result` <!-- ID: doc-op-le-Operand -->
+## `Type == Operand`          <!-- ID: doc-op-eq-Operand -->
+## `Type < Operand`           <!-- ID: doc-op-lt-Operand -->
+## `Type <= Operand`          <!-- ID: doc-op-le-Operand -->
 
 Identifiers on other operators have no extra information.
 ## `-Type : Result`            <!-- doc-op-unm -->
