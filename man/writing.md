@@ -78,7 +78,9 @@ rules.
 ### Links
 In order to decouple documents from a particular rendering, several URI schemes
 are defined for referring to other documents or resources. The non-scheme
-portion of the URI is a path that should be URL-escaped if needed.
+portion of the URI is a path that should be URL-escaped if needed. A URI may
+also have a fragment (starting after `#`) that indicates an identifier with the
+section pointed to by the path.
 
 <dl>
 
