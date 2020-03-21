@@ -8,6 +8,23 @@ doesn't mean you "own" it. Documents belong to all contributors of the project,
 so expect content you've written to be revised without mercy. Take pride in the
 contribution, not the content.
 
+#### Source licensing
+The Roblox Wiki (defunct) [used the GFDL][GFDL] as its license. This is not
+compatible with the [CC-BY-SA license][license] used by this project, so content
+from the Wiki must be considered with caution. In addition, it is likely that a
+significant amount of the content on the [DevHub][DevHub] was migrated from the
+Wiki. Therefore, it is assumed that the DevHub is subject to the same license
+until proven otherwise.
+
+When writing content, these websites should be avoided as much as possible.
+However, they *can* be used to confirm the accuracy of content that has already
+been written. The idea is to avoid intentionally or unintentionally copying
+documentation with an incompatible license.
+
+[GFDL]: https://web.archive.org/web/20160304001309/http://wiki.roblox.com/index.php/Roblox_Wiki:General_disclaimer
+[license]: LICENSE
+[DevHub]: https://developer.roblox.com
+
 ## Submitting issues
 Issues usually fall into one of a number of types:
 
