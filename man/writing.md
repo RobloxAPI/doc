@@ -135,6 +135,15 @@ Refers to a data type document. `$TYPE` is the name of a type entity.
 Refers to a member within the current document. `$MEMBER` is the name of a
 secondary entity within the primary entity of the current document.
 
+</dd>
+
+<dt><code>article:$NAME</code></dt>
+<dd>
+
+Refers to an article document. `$NAME` is the name of the article.
+
+</dd>
+
 </dl>
 
 The usual `http` URL scheme is allowed for external references (note that

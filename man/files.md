@@ -71,6 +71,14 @@ referred API entity. For example, `class/Workspace.md` documents the *Workspace*
 
 </dd>
 
+<dt><code>src/doc/$LANG/article/</code></dt>
+<dd>
+
+Documents of the Article category. These are discussion-oriented, and include
+patterns and concepts of entities, and the API itself.
+
+</dd>
+
 </dl>
 
 Here are some examples:
