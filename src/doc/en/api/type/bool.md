@@ -6,7 +6,7 @@ The bool type is used to signal one of two distinct options (either `true` or
 `false`). Its semantics vary widely depending on the context.
 
 # Examples
-[FindFirstChild](class:Instance/FindFirstChild) has an boolean argument,
+[FindFirstChild](class:Instance/FindFirstChild) has a boolean argument,
 *recursive*. When `true`, the method operates recursively:
 
 ```lua
