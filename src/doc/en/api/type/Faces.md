@@ -38,3 +38,11 @@ A boolean indicating whether the Bottom face is enabled.
 ## `Front: boolean`
 A boolean indicating whether the Front face is enabled.
 
+# Operators
+
+## `Faces == Faces`
+Determines whether two Faces values are equal.
+
+### Details
+A Faces value is equal to another Faces value if their Right, Top, Back, Left,
+Bottom, and Front fields are equal.

@@ -415,3 +415,11 @@ The name that describes the BrickColor.
 
 ## `Color: Color3`
 The [Color3](type:Color3) value corresponding to the BrickColor.
+
+# Operators
+
+## `BrickColor == BrickColor`
+Determines whether BrickColor values are equal.
+
+### Details
+A BrickColor is equal to another BrickColor if their Number fields are equal.

@@ -49,3 +49,11 @@ Whether the Y axis is enabled.
 
 ## `Z: boolean`
 Whether the Z axis is enabled.
+
+# Operators
+
+## `Axes == Axes`
+Determines whether Axes values are equal.
+
+### Details
+An Axes is equal to another Axes if their X, Y, and Z fields are equal.
