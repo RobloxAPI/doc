@@ -34,8 +34,8 @@ returns a number that is the linear interpolation of *x* to *y*, according to
 
 ### Unconstrained
 An **unconstrained interval** indicates that the effective values of the number
-lie between the specified interval, but values outside the interval can still
-affect the result.
+lie between the specified interval, but values outside the interval may or may
+not affect the result.
 
 Consider the following definition of the Lerp function:
 
