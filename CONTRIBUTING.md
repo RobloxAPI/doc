@@ -2,6 +2,12 @@
 This page provides information on contributing to the Roblox API Reference
 Documentation project.
 
+#### Ownership
+It's great if you've spent significant time and effort on a document, but this
+doesn't mean you "own" it. Documents belong to all contributors of the project,
+so expect content you've written to be revised without mercy. Take pride in the
+contribution, not the content.
+
 ## Submitting issues
 Issues usually fall into one of a number of types:
 
