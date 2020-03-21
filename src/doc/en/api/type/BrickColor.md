@@ -337,10 +337,12 @@ Some colors share the same name. For such cases, the [BrickColor
 table](#doc-details) indicates
 which color is returned for the given name.
 
-## `BrickColor.new(r: number = 0, g: number = 0, b: number = 0)`
+## `BrickColor.new(r: number?, g: number?, b: number?)`
 Returns the BrickColor nearest to the given color components.
 
 ### Details
+Each parameter defaults to 0.
+
 "Nearest" is loosely defined. If a given color is nearby multiple BrickColors
 within a margin of error, one result should not be expected over another.
 
