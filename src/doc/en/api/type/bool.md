@@ -2,10 +2,12 @@
 A type for representing a Boolean value.
 
 # Details
-The bool type is used to signal one of two distinct options (either `true` or `false`). Its semantics vary widely depending on the context.
+The bool type is used to signal one of two distinct options (either `true` or
+`false`). Its semantics vary widely depending on the context.
 
 # Examples
-[FindFirstChild](class:Instance/FindFirstChild) has an boolean argument, *recursive*. When `true`, the method operates recursively:
+[FindFirstChild](class:Instance/FindFirstChild) has an boolean argument,
+*recursive*. When `true`, the method operates recursively:
 
 ```lua
 local folder = Instance.new("Folder")
