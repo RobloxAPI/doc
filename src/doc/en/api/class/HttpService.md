@@ -158,7 +158,74 @@ If false, then [GetAsync](member:GetAsync), [PostAsync](member:PostAsync), and
 	Http requests are not enabled. Enable via game settings
 
 ## JSONDecode
+Decodes a JSON-formatted string into a value. The string is decoded according to
+[RFC8259][RFC8259].
+
+The following JSON types are converted into a corresponding Lua type:
+- A null is decoded into a Lua nil.
+- A boolean is decoded into a Lua boolean.
+- A number is decoded into the nearest representing Lua number.
+- A string is decoded into a Lua string.
+- An array is decoded into a Lua table, where each entry in the array is an
+  entry in the table, with indices starting at 1.
+- An object is decoded into a Lua table, where each field of the object is a
+  key-value pair in the table.
+
+[RFC8259]: https://tools.ietf.org/html/rfc8259
+
 ## JSONEncode
+Encodes *input* into a JSON-formatted string. *input* cannot be nil.
+
+The following types are encoded. Other types are encoded as `null`.
+
+### Boolean
+Mapped directly to a JSON boolean.
+
+### Number
+Encoded as a JSON number. Infinity and NaN are encoded as `null`.
+
+### String
+Encoded as a UTF-8 string. The following characters are escaped:
+
+Character       | Code | Escape
+----------------|------|-------
+Backspace       | 0x08 | `\b`
+Horzontal tab   | 0x09 | `\t`
+Line feed       | 0x0A | `\n`
+Form feed       | 0x0C | `\f`
+Carriage Return | 0x0D | `\r`
+Double quote    | 0x22 | `\"`
+Backslash       | 0x5C | `\\`
+
+Control characters (0x00 - 0x1F) not in this list are escaped as `\u00XX`, where
+`XX` is the character code in hexadecimal.
+
+Other unicode characters are encoded as-is. A malformed unicode character within
+any encoded string causes the following error to be thrown:
+
+	Can't convert to JSON
+
+### Table
+A table is encoded as either a JSON array or a JSON object, which depends on the
+content. A table is interpreted as an array if it is empty, or if it contains
+the integer 1 as a key. Otherwise, it is treated as an object.
+
+Tables are encoded recursively. If a table that is being or has already been
+encoded is traversed, the following error is thrown:
+
+	tables cannot be cyclic
+
+#### Array
+An array encodes integer keys from 1 to the length of the table. Other keys are
+ignored, and are not traversed.
+
+#### Object
+An object encodes certain types of keys to JSON strings. Keys are encoded in the
+same way as string values.
+
+The method for encoding non-string keys is undefined. It is possible that such a
+key will be converted to a string, throw an error, or be ignored entirely.
+
 ## PostAsync
 [PA]: member:PostAsync
 
