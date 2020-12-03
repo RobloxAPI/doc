@@ -161,7 +161,11 @@ If false, then [GetAsync](member:GetAsync), [PostAsync](member:PostAsync), and
 Decodes a JSON-formatted string into a value. The string is decoded according to
 [RFC8259][RFC8259].
 
+[RFC8259]: https://tools.ietf.org/html/rfc8259
+
+### Details
 The following JSON types are converted into a corresponding Lua type:
+
 - A null is decoded into a Lua nil.
 - A boolean is decoded into a Lua boolean.
 - A number is decoded into the nearest representing Lua number.
@@ -171,21 +175,14 @@ The following JSON types are converted into a corresponding Lua type:
 - An object is decoded into a Lua table, where each field of the object is a
   key-value pair in the table.
 
-[RFC8259]: https://tools.ietf.org/html/rfc8259
-
 ## JSONEncode
 Encodes *input* into a JSON-formatted string. *input* cannot be nil.
 
-The following types are encoded. Other types are encoded as `null`.
+### Details
+A **boolean** is mapped directly to a JSON boolean. A **number** is encoded as a
+JSON number. Infinity and NaN are encoded as a JSON null.
 
-### Boolean
-Mapped directly to a JSON boolean.
-
-### Number
-Encoded as a JSON number. Infinity and NaN are encoded as `null`.
-
-### String
-Encoded as a UTF-8 string. The following characters are escaped:
+A **string** is encoded as a UTF-8 string. The following characters are escaped:
 
 Character       | Code | Escape
 ----------------|------|-------
@@ -205,26 +202,24 @@ any encoded string causes the following error to be thrown:
 
 	Can't convert to JSON
 
-### Table
-A table is encoded as either a JSON array or a JSON object, which depends on the
-content. A table is interpreted as an array if it is empty, or if it contains
-the integer 1 as a key. Otherwise, it is treated as an object.
+A **table** is encoded as either a JSON array or a JSON object, which depends on
+the content. A table is interpreted as an array if it is empty, or if it
+contains the integer 1 as a key. Otherwise, it is treated as an object.
 
 Tables are encoded recursively. If a table that is being or has already been
 encoded is traversed, the following error is thrown:
 
 	tables cannot be cyclic
 
-#### Array
-An array encodes integer keys from 1 to the length of the table. Other keys are
-ignored, and are not traversed.
+A table interpreted as an array encodes integer keys from 1 to the length of
+the table. Other keys are ignored, and are not traversed.
 
-#### Object
-An object encodes certain types of keys to JSON strings. Keys are encoded in the
-same way as string values.
+A table interpreted as an object encodes certain types of keys to JSON strings.
+Keys are encoded in the same way as string values. The method for encoding
+non-string keys is undefined. It is possible that such a key will be converted
+to a string, throw an error, or be ignored entirely.
 
-The method for encoding non-string keys is undefined. It is possible that such a
-key will be converted to a string, throw an error, or be ignored entirely.
+Other types are encoded as a JSON null.
 
 ## PostAsync
 [PA]: member:PostAsync
